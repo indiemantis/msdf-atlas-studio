@@ -26,6 +26,8 @@ env.Append(CPPDEFINES=[
 if env["platform"] != "windows":
     env.Append(CCFLAGS=["-fPIC"])
     env.Append(CXXFLAGS=["-std=c++17"])
+else:
+    env.Append(CPPDEFINES=["_CRT_SECURE_NO_WARNINGS"])
 
 freetype_sources = [
     "thirdparty/freetype/src/base/ftsystem.c",

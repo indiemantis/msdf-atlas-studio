@@ -1,5 +1,6 @@
 .godot/
 /android/
+build/
 *.translation
 
 *.o
@@ -13,6 +14,7 @@
 *.dll
 .sconsign*
 .sconf_temp/
+.scons-cache/
 
 *.uid
 

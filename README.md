@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Godot Engine](https://img.shields.io/badge/Godot-4.3%2B-478cbf?logo=godotengine&logoColor=white)](https://godotengine.org)
 [![C++](https://img.shields.io/badge/C%2B%2B-17-00599C?logo=c%2B%2B&logoColor=white)](https://isocpp.org)
+[![Build & Release](https://github.com/sachinthankachan/msdf-atlas-studio/actions/workflows/build_and_release.yml/badge.svg)](https://github.com/sachinthankachan/msdf-atlas-studio/actions/workflows/build_and_release.yml)
 
 **MSDF Atlas Studio** is an open-source, high-performance desktop workstation for generating **Multi-channel Signed Distance Field (MSDF)** font texture atlases. Built with Godot 4 and C++ GDExtension, it wraps Viktor Chlumský's industry-standard `msdf-atlas-gen` and FreeType into an intuitive, responsive graphical studio.
 
