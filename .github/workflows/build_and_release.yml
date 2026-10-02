@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       create_draft_release:
-        description: 'Publish a draft release even without git tag'
+        description: 'Create draft release'
         required: false
         type: boolean
         default: false
@@ -141,6 +141,9 @@ jobs:
         run: |
           mkdir -p bin
           find downloaded-artifacts -type f \( -name "*.so" -o -name "*.dll" -o -name "*.dylib" \) -exec cp {} bin/ \;
+          cp bin/libmsdf_backend.linux.template_release.x86_64.so bin/libmsdf_backend.linux.template_debug.x86_64.so 2>/dev/null || true
+          cp bin/libmsdf_backend.windows.template_release.x86_64.dll bin/libmsdf_backend.windows.template_debug.x86_64.dll 2>/dev/null || true
+          cp bin/libmsdf_backend.macos.template_release.universal.dylib bin/libmsdf_backend.macos.template_debug.universal.dylib 2>/dev/null || true
           ls -la bin/
 
       - name: Setup Godot and Export Templates
@@ -163,6 +166,7 @@ jobs:
           fi
 
           mkdir -p build/linux build/windows build/macos
+          touch build/.gdignore
 
           ./godot --headless --export-release "Linux" build/linux/msdf-atlas-studio.x86_64
           mkdir -p build/linux/bin
