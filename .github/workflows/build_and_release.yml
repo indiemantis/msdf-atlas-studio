@@ -2,10 +2,7 @@ name: Build & Release
 
 on:
   push:
-    branches: [main]
     tags: ['v*']
-  pull_request:
-    branches: [main]
   workflow_dispatch:
     inputs:
       create_draft_release:
@@ -103,13 +100,6 @@ jobs:
           CORES=$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 2)
           scons platform=${{ matrix.platform }} arch=${{ matrix.arch }} target=template_release -j${CORES}
 
-      - name: Build GDExtension (template_debug)
-        shell: bash
-        run: |
-          cd src_cpp
-          CORES=$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 2)
-          scons platform=${{ matrix.platform }} arch=${{ matrix.arch }} target=template_debug -j${CORES}
-
       - name: Setup Godot for Smoke Test
         if: matrix.run-smoke-test
         run: |
@@ -177,14 +167,14 @@ jobs:
           ./godot --headless --export-release "Linux" build/linux/msdf-atlas-studio.x86_64
           mkdir -p build/linux/bin
           cp bin/msdf_atlas_studio.gdextension build/linux/bin/
-          cp bin/libmsdf_backend.linux.*.so build/linux/bin/
+          cp bin/libmsdf_backend.linux.template_release.x86_64.so build/linux/bin/
           cp icon.svg LICENSE README.md CONTRIBUTORS.md build/linux/
           tar -czf "msdf-atlas-studio-${TAG_OR_REF}-linux-x86_64.tar.gz" -C build/linux .
 
           ./godot --headless --export-release "Windows" build/windows/msdf-atlas-studio.exe
           mkdir -p build/windows/bin
           cp bin/msdf_atlas_studio.gdextension build/windows/bin/
-          cp bin/libmsdf_backend.windows.*.dll build/windows/bin/
+          cp bin/libmsdf_backend.windows.template_release.x86_64.dll build/windows/bin/
           cp icon.svg LICENSE README.md CONTRIBUTORS.md build/windows/
           (cd build/windows && zip -r "../../msdf-atlas-studio-${TAG_OR_REF}-windows-x86_64.zip" .)
 
@@ -192,7 +182,7 @@ jobs:
           unzip -q build/macos/msdf-atlas-studio.zip -d build/macos/extracted
           mkdir -p "build/macos/extracted/msdf-atlas-studio.app/Contents/MacOS/bin"
           cp bin/msdf_atlas_studio.gdextension "build/macos/extracted/msdf-atlas-studio.app/Contents/MacOS/bin/"
-          cp bin/libmsdf_backend.macos.*.dylib "build/macos/extracted/msdf-atlas-studio.app/Contents/MacOS/bin/"
+          cp bin/libmsdf_backend.macos.template_release.universal.dylib "build/macos/extracted/msdf-atlas-studio.app/Contents/MacOS/bin/"
           cp icon.svg LICENSE README.md CONTRIBUTORS.md build/macos/extracted/
           (cd build/macos/extracted && zip -r "../../../msdf-atlas-studio-${TAG_OR_REF}-macos-universal.zip" .)
 
