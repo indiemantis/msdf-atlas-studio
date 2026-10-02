@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://bwbtdo05pmfw"]
+
+[ext_resource type="Script" path="res://scenes/components/glyph_matrix_view.gd" id="1_script"]
+
+[node name="GlyphMatrixView" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="Header"]
+layout_mode = 2
+mouse_filter = 1
+tooltip_text = "Matrix grid of all selected glyphs with rasterization preview"
+theme_override_font_sizes/font_size = 14
+text = "GLYPH MATRIX"
+
+[node name="InfoLabel" type="Label" parent="Header"]
+layout_mode = 2
+mouse_filter = 1
+tooltip_text = "Glyph status: total selected, successfully packed, and missing from font"
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Total: 0 | Packed: 0 | Missing: 0"
+
+[node name="Spacer" type="Control" parent="Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FilterEdit" type="LineEdit" parent="Header"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+tooltip_text = "Filter glyphs by character (e.g. 'A') or hex codepoint (e.g. '0x0041')"
+placeholder_text = "Filter glyph or hex..."
+clear_button_enabled = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 16

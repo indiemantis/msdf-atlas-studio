@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://wphch21lilgi"]
+
+[ext_resource type="Script" path="res://scenes/components/unicode_range_picker.gd" id="1_script"]
+
+[node name="UnicodeRangePicker" type="VBoxContainer"]
+offset_right = 320.0
+offset_bottom = 260.0
+theme_override_constants/separation = 6
+script = ExtResource("1_script")
+
+[node name="HeaderLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "UNICODE RANGE MATRIX"
+
+[node name="PresetContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="ChkAscii" type="CheckBox" parent="PresetContainer"]
+layout_mode = 2
+tooltip_text = "Include Basic Latin printable ASCII characters (0x0020 to 0x007E)."
+button_pressed = true
+text = "Basic Latin (32..126)"
+
+[node name="ChkLatin1" type="CheckBox" parent="PresetContainer"]
+layout_mode = 2
+tooltip_text = "Include Latin-1 Supplement characters (0x00A0 to 0x00FF) for Western European languages."
+text = "Latin-1 (160..255)"
+
+[node name="ChkLatinExt" type="CheckBox" parent="PresetContainer"]
+layout_mode = 2
+tooltip_text = "Include Latin Extended-A characters (0x0100 to 0x017F) for Central/Eastern European languages."
+text = "Latin Ext-A (256..383)"
+
+[node name="ChkCyrillic" type="CheckBox" parent="PresetContainer"]
+layout_mode = 2
+tooltip_text = "Include Cyrillic alphabet characters (0x0400 to 0x045F) for Slavic languages."
+text = "Cyrillic (1024..1119)"
+
+[node name="ChkGreek" type="CheckBox" parent="PresetContainer"]
+layout_mode = 2
+tooltip_text = "Include Greek and Coptic script characters (0x0370 to 0x03FF)."
+text = "Greek & Coptic (880..1023)"
+
+[node name="CustomRangeContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="CustomLabel" type="Label" parent="CustomRangeContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Add Custom Range:"
+
+[node name="HBox" type="HBoxContainer" parent="CustomRangeContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="FromEdit" type="LineEdit" parent="CustomRangeContainer/HBox"]
+custom_minimum_size = Vector2(36, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+tooltip_text = "Starting Unicode codepoint in hex (e.g. 0x0020) or decimal."
+placeholder_text = "From"
+
+[node name="ToEdit" type="LineEdit" parent="CustomRangeContainer/HBox"]
+custom_minimum_size = Vector2(36, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.0
+tooltip_text = "Ending Unicode codepoint in hex (e.g. 0x007E) or decimal."
+placeholder_text = "To"
+
+[node name="AddButton" type="Button" parent="CustomRangeContainer/HBox"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+tooltip_text = "Add this custom codepoint range to the atlas generation set."
+text = "Add"
+
+[node name="FeedbackLabel" type="Label" parent="CustomRangeContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 0.5, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="ActiveCustomContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ActiveCustomTitle" type="Label" parent="ActiveCustomContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Active Custom Ranges:"
+
+[node name="ActiveCustomList" type="VBoxContainer" parent="ActiveCustomContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="CountLabel" type="Label" parent="."]
+layout_mode = 2
+mouse_filter = 1
+tooltip_text = "Total unique glyph codepoints currently selected for generation."
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "Selected Codepoints: 95"

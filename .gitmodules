@@ -1,0 +1,15 @@
+[submodule "src_cpp/thirdparty/godot-cpp"]
+	path = src_cpp/thirdparty/godot-cpp
+	url = https://github.com/godotengine/godot-cpp.git
+
+[submodule "src_cpp/thirdparty/freetype"]
+	path = src_cpp/thirdparty/freetype
+	url = https://github.com/freetype/freetype.git
+
+[submodule "src_cpp/thirdparty/msdf-atlas-gen"]
+	path = src_cpp/thirdparty/msdf-atlas-gen
+	url = https://github.com/Chlumsky/msdf-atlas-gen.git
+
+[submodule "src_cpp/thirdparty/msdfgen"]
+	path = src_cpp/thirdparty/msdfgen
+	url = https://github.com/Chlumsky/msdfgen.git

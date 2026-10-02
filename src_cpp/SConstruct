@@ -1,0 +1,81 @@
+import os
+import sys
+
+env = SConscript("thirdparty/godot-cpp/SConstruct")
+
+env.Append(CPPPATH=[
+    "thirdparty/freetype/include",
+    "thirdparty/msdfgen",
+    "thirdparty/msdfgen/core",
+    "thirdparty/msdf-atlas-gen",
+    "thirdparty/msdf-atlas-gen/msdf-atlas-gen",
+    ".",
+])
+
+env.Append(CPPDEFINES=[
+    "FT2_BUILD_LIBRARY",
+    ("FT_CONFIG_MODULES_H", '\\"freetype_modules.h\\"'),
+    "MSDFGEN_USE_CPP11",
+    "MSDF_ATLAS_NO_ARTERY_FONT",
+    "MSDFGEN_DISABLE_SVG",
+    "MSDFGEN_DISABLE_PNG",
+    "MSDFGEN_PUBLIC=",
+    "MSDF_ATLAS_PUBLIC=",
+])
+
+if env["platform"] != "windows":
+    env.Append(CCFLAGS=["-fPIC"])
+    env.Append(CXXFLAGS=["-std=c++17"])
+
+freetype_sources = [
+    "thirdparty/freetype/src/base/ftsystem.c",
+    "thirdparty/freetype/src/base/ftinit.c",
+    "thirdparty/freetype/src/base/ftbase.c",
+    "thirdparty/freetype/src/base/ftbbox.c",
+    "thirdparty/freetype/src/base/ftbdf.c",
+    "thirdparty/freetype/src/base/ftbitmap.c",
+    "thirdparty/freetype/src/base/ftglyph.c",
+    "thirdparty/freetype/src/base/ftmm.c",
+    "thirdparty/freetype/src/truetype/truetype.c",
+    "thirdparty/freetype/src/sfnt/sfnt.c",
+    "thirdparty/freetype/src/cff/cff.c",
+    "thirdparty/freetype/src/psnames/psnames.c",
+    "thirdparty/freetype/src/psaux/psaux.c",
+    "thirdparty/freetype/src/pshinter/pshinter.c",
+    "thirdparty/freetype/src/smooth/smooth.c",
+    "thirdparty/freetype/src/raster/raster.c",
+    "thirdparty/freetype/src/gzip/ftgzip.c",
+    "thirdparty/freetype/src/base/ftdebug.c",
+]
+
+msdfgen_sources = Glob("thirdparty/msdfgen/core/*.cpp")
+msdfgen_sources.append("thirdparty/msdfgen/ext/import-font.cpp")
+msdfgen_sources.append("thirdparty/msdfgen/ext/resolve-shape-geometry.cpp")
+
+# skip standalone tools and artery export because we only need the core atlas generator
+atlas_gen_all = Glob("thirdparty/msdf-atlas-gen/msdf-atlas-gen/*.cpp")
+msdf_atlas_sources = []
+for src in atlas_gen_all:
+    path_str = str(src)
+    if not (path_str.endswith("main.cpp") or path_str.endswith("artery-font-export.cpp") or path_str.endswith("shadron-preview-generator.cpp")):
+        msdf_atlas_sources.append(src)
+
+module_sources = Glob("*.cpp")
+
+all_sources = freetype_sources + msdfgen_sources + msdf_atlas_sources + module_sources
+
+bin_dir = "../bin"
+if not os.path.exists(bin_dir):
+    os.makedirs(bin_dir)
+
+if env["platform"] == "macos":
+    lib_name = f"{bin_dir}/libmsdf_backend.{env['platform']}.{env['target']}.universal{env['SHLIBSUFFIX']}"
+elif env["platform"] == "windows":
+    arch = env.get("arch", "x86_64")
+    lib_name = f"{bin_dir}/libmsdf_backend.windows.{env['target']}.{arch}{env['SHLIBSUFFIX']}"
+else:
+    arch = env.get("arch", "x86_64")
+    lib_name = f"{bin_dir}/libmsdf_backend.linux.{env['target']}.{arch}{env['SHLIBSUFFIX']}"
+
+library = env.SharedLibrary(lib_name, source=all_sources)
+Default(library)

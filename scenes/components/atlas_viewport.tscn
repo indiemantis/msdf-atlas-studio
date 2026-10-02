@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://ds51m5lb8sc8o"]
+
+[ext_resource type="Script" path="res://scenes/components/atlas_viewport.gd" id="1_script"]
+[ext_resource type="Script" path="res://scripts/viewports/smooth_pan_zoom.gd" id="2_panzoom"]
+
+[node name="AtlasViewport" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Toolbar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 6
+
+[node name="ChannelsLabel" type="Label" parent="Toolbar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Channels:"
+
+[node name="ChannelR" type="Button" parent="Toolbar"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+tooltip_text = "Toggle Red color channel"
+text = "R"
+
+[node name="ChannelG" type="Button" parent="Toolbar"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+tooltip_text = "Toggle Green color channel"
+text = "G"
+
+[node name="ChannelB" type="Button" parent="Toolbar"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+tooltip_text = "Toggle Blue color channel"
+text = "B"
+
+[node name="ChannelA" type="Button" parent="Toolbar"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+tooltip_text = "Toggle Alpha channel"
+text = "A"
+
+[node name="VSeparator" type="VSeparator" parent="Toolbar"]
+layout_mode = 2
+
+[node name="ModeLabel" type="Label" parent="Toolbar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Mode:"
+
+[node name="ModeOption" type="OptionButton" parent="Toolbar"]
+custom_minimum_size = Vector2(165, 0)
+layout_mode = 2
+tooltip_text = "Select atlas preview shader mode (MSDF, Raw Channels, Distance, etc.)"
+
+[node name="Spacer" type="Control" parent="Toolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ZoomLabel" type="Label" parent="Toolbar"]
+custom_minimum_size = Vector2(44, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "100%"
+horizontal_alignment = 1
+
+[node name="ZoomIn" type="Button" parent="Toolbar"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+tooltip_text = "Zoom in (+)"
+text = "+"
+
+[node name="ZoomOut" type="Button" parent="Toolbar"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+tooltip_text = "Zoom out (-)"
+text = "-"
+
+[node name="ZoomReset" type="Button" parent="Toolbar"]
+custom_minimum_size = Vector2(30, 26)
+layout_mode = 2
+tooltip_text = "Reset zoom to 100% (1:1)"
+text = "1:1"
+
+[node name="ZoomFit" type="Button" parent="Toolbar"]
+custom_minimum_size = Vector2(30, 26)
+layout_mode = 2
+tooltip_text = "Fit entire texture to viewport"
+text = "Fit"
+
+[node name="PanZoomContainer" type="Control" parent="." node_paths=PackedStringArray("target_node")]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+script = ExtResource("2_panzoom")
+target_node = NodePath("Content")
+
+[node name="Background" type="ColorRect" parent="PanZoomContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.08, 0.08, 0.09, 1)
+
+[node name="Content" type="Control" parent="PanZoomContainer"]
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 1024.0
+
+[node name="AtlasTextureRect" type="TextureRect" parent="PanZoomContainer/Content"]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 1024.0
+mouse_filter = 0
+expand_mode = 1
+
+[node name="GlyphHighlightOverlay" type="Control" parent="PanZoomContainer/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

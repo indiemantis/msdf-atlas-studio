@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://d4b5ynps75aea"]
+
+[ext_resource type="Script" path="res://scenes/components/font_loader_panel.gd" id="1_script"]
+
+[node name="FontLoaderPanel" type="VBoxContainer"]
+offset_right = 320.0
+offset_bottom = 220.0
+theme_override_constants/separation = 8
+script = ExtResource("1_script")
+
+[node name="HeaderLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "FONT FILES & FALLBACKS"
+
+[node name="PrimaryLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Primary Typeface:"
+
+[node name="PrimaryFontContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PathEdit" type="LineEdit" parent="PrimaryFontContainer"]
+custom_minimum_size = Vector2(40, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Path to the currently loaded primary font file."
+placeholder_text = "Select font..."
+editable = false
+
+[node name="BrowseButton" type="Button" parent="PrimaryFontContainer"]
+custom_minimum_size = Vector2(75, 28)
+layout_mode = 2
+tooltip_text = "Browse filesystem for a .ttf, .otf, or .woff font file."
+text = "Browse..."
+
+[node name="BundledFontButton" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+clip_text = true
+tooltip_text = "Reset and load the bundled DejaVu Sans demo font."
+text = "Load Bundled Demo (DejaVu Sans)"
+
+[node name="FontInfoLabel" type="Label" parent="."]
+layout_mode = 2
+mouse_filter = 1
+tooltip_text = "Active primary font information."
+theme_override_colors/font_color = Color(0.5, 0.8, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+text = "No font selected"
+text_overrun_behavior = 3
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="FallbackLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Fallback Typefaces:"
+
+[node name="FallbackContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="FallbackList" type="VBoxContainer" parent="FallbackContainer"]
+layout_mode = 2
+
+[node name="ButtonBox" type="HBoxContainer" parent="FallbackContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="AddFallbackButton" type="Button" parent="FallbackContainer/ButtonBox"]
+custom_minimum_size = Vector2(50, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+clip_text = true
+tooltip_text = "Add a fallback typeface to supply glyphs missing from the primary font."
+text = "+ Fallback..."
+
+[node name="ClearFallbackButton" type="Button" parent="FallbackContainer/ButtonBox"]
+custom_minimum_size = Vector2(56, 28)
+layout_mode = 2
+tooltip_text = "Remove all loaded fallback fonts."
+text = "Clear"

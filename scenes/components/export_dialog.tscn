@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://b1jtgbiwy5n0k"]
+
+[ext_resource type="Script" path="res://scenes/components/export_dialog.gd" id="1_script"]
+
+[node name="ExportDialog" type="ConfirmationDialog"]
+title = "Export Assets & Metadata"
+size = Vector2i(580, 420)
+min_size = Vector2i(560, 400)
+script = ExtResource("1_script")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 568.0
+offset_bottom = 368.0
+theme_override_constants/separation = 8
+
+[node name="DirLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Export Destination Folder:"
+
+[node name="DirContainer" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="DirEdit" type="LineEdit" parent="VBox/DirContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "user://exports"
+
+[node name="BrowseButton" type="Button" parent="VBox/DirContainer"]
+layout_mode = 2
+tooltip_text = "Select destination directory on disk"
+text = "Browse..."
+
+[node name="FileContainer" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="NameLabel" type="Label" parent="VBox/FileContainer"]
+layout_mode = 2
+text = "Base Filename:"
+
+[node name="FilenameEdit" type="LineEdit" parent="VBox/FileContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Base filename used for all generated export files"
+text = "msdf_atlas"
+
+[node name="HSeparator" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="FormatsLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Export Formats to Generate:"
+
+[node name="FormatsGrid" type="GridContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="ChkPng" type="CheckBox" parent="VBox/FormatsGrid"]
+layout_mode = 2
+tooltip_text = "Export the generated distance field texture as an uncompressed PNG"
+button_pressed = true
+text = "Atlas Texture PNG (.png)"
+
+[node name="ChkJson" type="CheckBox" parent="VBox/FormatsGrid"]
+layout_mode = 2
+tooltip_text = "Export Viktor Chlumský's standardized msdf-atlas-gen JSON descriptor"
+text = "Chlumský JSON Manifest (.json)"
+
+[node name="ChkBMFontTxt" type="CheckBox" parent="VBox/FormatsGrid"]
+layout_mode = 2
+tooltip_text = "Export AngelCode BMFont text (.fnt) layout format"
+text = "BMFont Text Format (.fnt)"
+
+[node name="ChkBMFontXml" type="CheckBox" parent="VBox/FormatsGrid"]
+layout_mode = 2
+tooltip_text = "Export AngelCode BMFont XML descriptor format"
+text = "BMFont XML Format (.xml)"
+
+[node name="ChkGodotTres" type="CheckBox" parent="VBox/FormatsGrid"]
+layout_mode = 2
+tooltip_text = "Export native Godot 4 FontFile (.tres), companion LabelSettings, and Material"
+text = "Godot 4 FontFile (.tres)"
+
+[node name="ChkCHeader" type="CheckBox" parent="VBox/FormatsGrid"]
+layout_mode = 2
+tooltip_text = "Export pure C/C++ lookup header table for embedded or native engine integration"
+text = "C/C++ Header Lookup (.h)"
+
+[node name="ChkShaders" type="CheckBox" parent="VBox/FormatsGrid"]
+layout_mode = 2
+tooltip_text = "Export standalone MSDF shaders for Godot, HLSL, and GLSL"
+text = "Shader Bundle (Godot, HLSL, GLSL)"
+
+[node name="StatusLabel" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "Select formats and click Export Assets."
+autowrap_mode = 2

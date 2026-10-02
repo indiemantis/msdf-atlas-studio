@@ -1,0 +1,439 @@
+[gd_scene format=3 uid="uid://cmainscene001"]
+
+[ext_resource type="Script" uid="uid://b6judmbit25cy" path="res://scenes/main.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://d4b5ynps75aea" path="res://scenes/components/font_loader_panel.tscn" id="2_fontloader"]
+[ext_resource type="PackedScene" uid="uid://wphch21lilgi" path="res://scenes/components/unicode_range_picker.tscn" id="3_unicodepicker"]
+[ext_resource type="PackedScene" uid="uid://ds2w22eawrc8o" path="res://scenes/components/atlas_settings_panel.tscn" id="4_atlassettings"]
+[ext_resource type="PackedScene" uid="uid://ds51m5lb8sc8o" path="res://scenes/components/atlas_viewport.tscn" id="5_atlasview"]
+[ext_resource type="PackedScene" uid="uid://cfc2v5sjr1lka" path="res://scenes/components/text_preview_viewport.tscn" id="6_textpreview"]
+[ext_resource type="PackedScene" uid="uid://bwbtdo05pmfw" path="res://scenes/components/glyph_matrix_view.tscn" id="7_glyphgrid"]
+[ext_resource type="PackedScene" uid="uid://b1jtgbiwy5n0k" path="res://scenes/components/export_dialog.tscn" id="8_exportdialog"]
+
+[node name="Main" type="Control" unique_id=87620542]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main")
+
+[node name="VBoxMain" type="VBoxContainer" parent="." unique_id=1678168921]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TopMenuBar" type="HBoxContainer" parent="VBoxMain" unique_id=1242500702]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="File" type="MenuButton" parent="VBoxMain/TopMenuBar" unique_id=802268996]
+custom_minimum_size = Vector2(84, 28)
+layout_mode = 2
+tooltip_text = "File operations (Export, Quit)"
+text = "File"
+
+[node name="Presets" type="MenuButton" parent="VBoxMain/TopMenuBar" unique_id=132435682]
+custom_minimum_size = Vector2(84, 28)
+layout_mode = 2
+tooltip_text = "Quick Unicode presets (Basic ASCII, Latin-1, etc.)"
+text = "Presets"
+
+[node name="View" type="MenuButton" parent="VBoxMain/TopMenuBar" unique_id=1002580878]
+custom_minimum_size = Vector2(84, 28)
+layout_mode = 2
+tooltip_text = "Viewport zoom controls (Reset Zoom, Fit to View)"
+text = "View"
+
+[node name="Help" type="MenuButton" parent="VBoxMain/TopMenuBar" unique_id=1489284154]
+custom_minimum_size = Vector2(84, 28)
+layout_mode = 2
+tooltip_text = "Information about MSDF Atlas Studio"
+text = "Help"
+
+[node name="HSplitMain" type="HSplitContainer" parent="VBoxMain" unique_id=2109702732]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftSidebar" type="PanelContainer" parent="VBoxMain/HSplitMain" unique_id=867461247]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="VBoxMain/HSplitMain/LeftSidebar" unique_id=963358052]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="VBoxMain/HSplitMain/LeftSidebar/Scroll" unique_id=524426589]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="VBoxMain/HSplitMain/LeftSidebar/Scroll/Margin" unique_id=696955269]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="FontLoaderPanel" parent="VBoxMain/HSplitMain/LeftSidebar/Scroll/Margin/VBox" unique_id=1955674671 instance=ExtResource("2_fontloader")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="VBoxMain/HSplitMain/LeftSidebar/Scroll/Margin/VBox" unique_id=881558890]
+layout_mode = 2
+
+[node name="UnicodeRangePicker" parent="VBoxMain/HSplitMain/LeftSidebar/Scroll/Margin/VBox" unique_id=705975570 instance=ExtResource("3_unicodepicker")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxMain/HSplitMain/LeftSidebar/Scroll/Margin/VBox" unique_id=1190400782]
+layout_mode = 2
+
+[node name="AtlasSettingsPanel" parent="VBoxMain/HSplitMain/LeftSidebar/Scroll/Margin/VBox" unique_id=895658129 instance=ExtResource("4_atlassettings")]
+layout_mode = 2
+
+[node name="CenterRightSplit" type="HSplitContainer" parent="VBoxMain/HSplitMain" unique_id=359955418]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CenterArea" type="PanelContainer" parent="VBoxMain/HSplitMain/CenterRightSplit" unique_id=345832551]
+custom_minimum_size = Vector2(280, 0)
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TabContainer" type="TabContainer" parent="VBoxMain/HSplitMain/CenterRightSplit/CenterArea" unique_id=1479467952]
+clip_contents = true
+layout_mode = 2
+current_tab = 0
+
+[node name="AtlasView" parent="VBoxMain/HSplitMain/CenterRightSplit/CenterArea/TabContainer" unique_id=80955907 instance=ExtResource("5_atlasview")]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="LiveTextSandbox" parent="VBoxMain/HSplitMain/CenterRightSplit/CenterArea/TabContainer" unique_id=128740719 instance=ExtResource("6_textpreview")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="GlyphGrid" parent="VBoxMain/HSplitMain/CenterRightSplit/CenterArea/TabContainer" unique_id=922307024 instance=ExtResource("7_glyphgrid")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="RightSidebar" type="PanelContainer" parent="VBoxMain/HSplitMain/CenterRightSplit" unique_id=1570336052]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar" unique_id=414972684]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll" unique_id=2026818565]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBox" type="VBoxContainer" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin" unique_id=870670946]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="InspectorTitle" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox" unique_id=1116977461]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "GLYPH INSPECTOR"
+
+[node name="InspectorSection" type="VBoxContainer" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox" unique_id=1525854737]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Tile" type="PanelContainer" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/InspectorSection" unique_id=504531826]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "Preview of the selected glyph contour"
+mouse_filter = 1
+
+[node name="CharLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/InspectorSection/Tile" unique_id=216027256]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UnicodeLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/InspectorSection" unique_id=910100085]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Unicode:"
+
+[node name="UnicodeValue" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/InspectorSection" unique_id=1813663979]
+layout_mode = 2
+tooltip_text = "Selected character and Unicode hex codepoint"
+mouse_filter = 1
+theme_override_font_sizes/font_size = 13
+text = "A (0x0041)"
+
+[node name="AdvanceLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/InspectorSection" unique_id=1969542925]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Advance Width:"
+
+[node name="AdvanceValue" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/InspectorSection" unique_id=917876150]
+layout_mode = 2
+tooltip_text = "Horizontal advance width for layout in em units"
+mouse_filter = 1
+theme_override_font_sizes/font_size = 13
+text = "0.650 em"
+
+[node name="PlaneLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/InspectorSection" unique_id=165349092]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Plane Bounds [l, b, r, t]:"
+
+[node name="PlaneValue" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/InspectorSection" unique_id=1707629299]
+layout_mode = 2
+tooltip_text = "Normalized glyph quad plane bounds [left, bottom, right, top] in em"
+mouse_filter = 1
+theme_override_font_sizes/font_size = 13
+text = "[0.02, 0.00, 0.63, 0.72]"
+
+[node name="AtlasLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/InspectorSection" unique_id=453450296]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Atlas Bounds [l, b, r, t]:"
+
+[node name="AtlasValue" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/InspectorSection" unique_id=1579402648]
+layout_mode = 2
+tooltip_text = "Atlas texture pixel coordinates [left, bottom, right, top]"
+mouse_filter = 1
+theme_override_font_sizes/font_size = 13
+text = "[12, 14, 45, 58]"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox" unique_id=528111295]
+layout_mode = 2
+
+[node name="MetricsTitle" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox" unique_id=1061839858]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "METRICS SUMMARY"
+
+[node name="MetricsSection" type="GridContainer" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox" unique_id=891356435]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="GlyphsLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/MetricsSection" unique_id=1357156217]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Glyphs:"
+
+[node name="GlyphsValue" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/MetricsSection" unique_id=979746939]
+layout_mode = 2
+tooltip_text = "Total number of successfully rasterized and packed glyphs"
+mouse_filter = 1
+theme_override_font_sizes/font_size = 13
+text = "0"
+
+[node name="PackedLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/MetricsSection" unique_id=1215889661]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Efficiency:"
+
+[node name="PackedValue" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/MetricsSection" unique_id=1022208845]
+layout_mode = 2
+tooltip_text = "Texture packing efficiency (area utilized vs total texture area)"
+mouse_filter = 1
+theme_override_font_sizes/font_size = 13
+text = "0.0%"
+
+[node name="MemoryLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/MetricsSection" unique_id=87098989]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Texture VRAM:"
+
+[node name="MemoryValue" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/MetricsSection" unique_id=1162851376]
+layout_mode = 2
+tooltip_text = "Estimated GPU VRAM allocated for this atlas texture"
+mouse_filter = 1
+theme_override_font_sizes/font_size = 13
+text = "0.00 MB"
+
+[node name="FormatLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/MetricsSection" unique_id=397170125]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Field Format:"
+
+[node name="FormatValue" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/MetricsSection" unique_id=737963893]
+layout_mode = 2
+tooltip_text = "Distance field encoding format used by the atlas"
+mouse_filter = 1
+theme_override_font_sizes/font_size = 13
+text = "MSDF"
+
+[node name="KerningLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/MetricsSection" unique_id=2119430348]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Kerning Pairs:"
+
+[node name="KerningValue" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/MetricsSection" unique_id=1728078288]
+layout_mode = 2
+tooltip_text = "Total extracted typographic kerning pairs"
+mouse_filter = 1
+theme_override_font_sizes/font_size = 13
+text = "0 pairs"
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox" unique_id=383233215]
+layout_mode = 2
+
+[node name="ShaderTitle" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox" unique_id=1090633222]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "LIVE SHADER EFFECTS"
+
+[node name="ShaderSection" type="VBoxContainer" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox" unique_id=342833731]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TextColorLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=652008004]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+text = "Text Color:"
+
+[node name="TextColorPicker" type="ColorPickerButton" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=1902765817]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+tooltip_text = "Primary text fill color and opacity."
+color = Color(1, 1, 1, 1)
+
+[node name="OutlineSeparator" type="HSeparator" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=709117060]
+layout_mode = 2
+
+[node name="OutlineCheck" type="CheckBox" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=1119313396]
+layout_mode = 2
+tooltip_text = "Enable real-time MSDF procedural text outline."
+text = "Enable Outline"
+
+[node name="OutlineColorLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=71538432]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Outline Color:"
+
+[node name="OutlineColorPicker" type="ColorPickerButton" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=926386612]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+tooltip_text = "Color and opacity of the text outline."
+
+[node name="OutlineThicknessLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=367261032]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Outline Thickness:"
+
+[node name="OutlineSlider" type="HSlider" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=630083214]
+layout_mode = 2
+tooltip_text = "Adjust thickness of the procedural outline."
+max_value = 0.4
+step = 0.01
+editable = false
+
+[node name="ShadowSeparator" type="HSeparator" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=421426867]
+layout_mode = 2
+
+[node name="ShadowCheck" type="CheckBox" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=1418240802]
+layout_mode = 2
+tooltip_text = "Enable real-time MSDF drop shadow effect."
+text = "Enable Drop Shadow"
+
+[node name="ShadowColorLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=1982903487]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Shadow Color & Opacity:"
+
+[node name="ShadowColorPicker" type="ColorPickerButton" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=440420110]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+tooltip_text = "Color and opacity of the drop shadow."
+color = Color(0, 0, 0, 0.5)
+
+[node name="ShadowSoftnessLabel" type="Label" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=2085094718]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "Shadow Softness:"
+
+[node name="ShadowSoftnessSlider" type="HSlider" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=1131959342]
+layout_mode = 2
+tooltip_text = "Adjust softness and blur spread of the drop shadow."
+max_value = 0.1
+step = 0.005
+value = 0.03
+editable = false
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox" unique_id=1769314172]
+layout_mode = 2
+
+[node name="ExportButton" type="Button" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox" unique_id=1550376412]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+tooltip_text = "Open export dialog to save atlas texture, JSON manifest, BMFont, or Godot resource."
+theme_override_font_sizes/font_size = 14
+text = "EXPORT ASSETS..."
+
+[node name="StatusBarMargin" type="MarginContainer" parent="VBoxMain" unique_id=1253117133]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 4
+
+[node name="StatusBar" type="HBoxContainer" parent="VBoxMain/StatusBarMargin" unique_id=1921130131]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="WorkerLabel" type="Label" parent="VBoxMain/StatusBarMargin/StatusBar" unique_id=1268021590]
+layout_mode = 2
+tooltip_text = "Status of the background worker generation thread"
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.5, 0.9, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+text = "Worker Thread: Idle"
+
+[node name="VSeparator" type="VSeparator" parent="VBoxMain/StatusBarMargin/StatusBar" unique_id=802123814]
+layout_mode = 2
+
+[node name="TimeLabel" type="Label" parent="VBoxMain/StatusBarMargin/StatusBar" unique_id=1473150627]
+layout_mode = 2
+tooltip_text = "Elapsed time for the last atlas generation run"
+mouse_filter = 1
+theme_override_font_sizes/font_size = 13
+text = "Generation Time: 0 ms"
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxMain/StatusBarMargin/StatusBar" unique_id=1705485278]
+layout_mode = 2
+
+[node name="MessageLabel" type="Label" parent="VBoxMain/StatusBarMargin/StatusBar" unique_id=1057223223]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Latest operational status message"
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+text = "Ready"
+
+[node name="ExportDialog" parent="." unique_id=754044852 instance=ExtResource("8_exportdialog")]
