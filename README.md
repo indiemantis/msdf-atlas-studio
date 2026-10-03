@@ -1,11 +1,14 @@
-# MSDF Atlas Studio
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Godot Engine](https://img.shields.io/badge/Godot-4.3%2B-478cbf?logo=godotengine&logoColor=white)](https://godotengine.org)
 [![C++](https://img.shields.io/badge/C%2B%2B-17-00599C?logo=c%2B%2B&logoColor=white)](https://isocpp.org)
 [![Build & Release](https://github.com/sachinthankachan/msdf-atlas-studio/actions/workflows/build_and_release.yml/badge.svg)](https://github.com/sachinthankachan/msdf-atlas-studio/actions/workflows/build_and_release.yml)
 
-
+<br><br><br>
+<p align="center">
+  
+  <img src="icon.png" alt="MSDF Atlas Studio Main UI" width="20%">
+</p>
+<h1 align = "center">MSDF Atlas Studio</h1><br>
 <p align="center">
   <img src="docs/images/msdf_atlas_studio_hero.png" alt="MSDF Atlas Studio Main UI" width="90%">
 </p>
