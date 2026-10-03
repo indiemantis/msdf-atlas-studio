@@ -47,10 +47,10 @@ func _setup_toolbar() -> void:
 	btn_a.toggle_mode = true
 	btn_a.button_pressed = true
 
-	btn_r.toggled.connect(func(p): _set_channel("r", p, btn_r))
-	btn_g.toggled.connect(func(p): _set_channel("g", p, btn_g))
-	btn_b.toggled.connect(func(p): _set_channel("b", p, btn_b))
-	btn_a.toggled.connect(func(p): _set_channel("a", p, btn_a))
+	btn_r.toggled.connect(func(p): _set_channel("r", p))
+	btn_g.toggled.connect(func(p): _set_channel("g", p))
+	btn_b.toggled.connect(func(p): _set_channel("b", p))
+	btn_a.toggled.connect(func(p): _set_channel("a", p))
 
 	mode_opt.clear()
 	mode_opt.add_item("Channels Isolation", 0)
@@ -68,9 +68,8 @@ func _setup_toolbar() -> void:
 	btn_zoom_fit.pressed.connect(pan_zoom.fit_to_view)
 	btn_zoom_reset.pressed.connect(pan_zoom.center_view)
 
-func _set_channel(ch: String, active: bool, btn: Button) -> void:
+func _set_channel(ch: String, active: bool) -> void:
 	channel_states[ch] = active
-	btn.modulate = Color.WHITE if active else Color(0.4, 0.4, 0.4, 1.0)
 	inspector_material.set_shader_parameter("channel_" + ch, active)
 
 func _on_mode_selected(idx: int) -> void:

@@ -76,7 +76,7 @@ static func export_font_resource(path: String, metadata: Dictionary, atlas_image
 
 		var outline_thick: float = shader_params.get("outline_thickness", 0.0)
 		if outline_thick > 0.001:
-			label_settings.outline_size = max(1, int(round(outline_thick * font_size)))
+			label_settings.outline_size = max(1, int(round(outline_thick * font_size * 0.25)))
 			label_settings.outline_color = shader_params.get("outline_color", Color.BLACK)
 
 		var shadow_col: Color = shader_params.get("shadow_color", Color(0, 0, 0, 0))

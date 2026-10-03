@@ -17,6 +17,9 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="MSDF Atlas Studio"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/bg_color=Color(0.003921569, 0, 0.023529412, 1)
+boot_splash/stretch_mode=0
+boot_splash/image="uid://d3428jyads8kk"
 config/icon="res://icon.svg"
 run/low_processor_usage_mode=true
 
@@ -31,6 +34,10 @@ window/size/viewport_height=680
 window/size/min_width=860
 window/size/min_height=500
 
+[gui]
+
+theme/custom="uid://fuc6la3g6hpo"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
@@ -40,8 +47,8 @@ window/size/min_height=500
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-textures/vram_compression/import_etc2_astc=true
 textures/vram_compression/import_s3tc_bptc=true
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.04903976, 0.04903976, 0.04903973, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true

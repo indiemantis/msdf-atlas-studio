@@ -41,9 +41,12 @@ static func extract_kerning(font_path: String, codepoints: PackedInt32Array, em_
 	var font_rids: Array[RID] = font.get_rids()
 	var font_rid: RID = font_rids[0] if not font_rids.is_empty() else RID()
 
-	var glyph_to_cp: Dictionary = {}
+	var glyph_to_cps: Dictionary = {}
 	for cp in kernable_cps:
-		glyph_to_cp[glyph_indices[cp]] = cp
+		var gid: int = glyph_indices[cp]
+		if not glyph_to_cps.has(gid):
+			glyph_to_cps[gid] = []
+		glyph_to_cps[gid].append(cp)
 
 	var pair_list: Array = []
 	if font_rid.is_valid() and ts:
@@ -53,32 +56,27 @@ static func extract_kerning(font_path: String, codepoints: PackedInt32Array, em_
 		for p in pair_list:
 			var g1: int = p.x
 			var g2: int = p.y
-			if glyph_to_cp.has(g1) and glyph_to_cp.has(g2):
-				var cp1: int = glyph_to_cp[g1]
-				var cp2: int = glyph_to_cp[g2]
+			if glyph_to_cps.has(g1) and glyph_to_cps.has(g2):
 				var k_vec: Vector2 = ts.font_get_kerning(font_rid, test_size, Vector2i(g1, g2))
 				var adv_em: float = snappedf(k_vec.x / float(test_size), 0.0001)
-				if absf(k_vec.x) > 0.05 and adv_em >= -0.25 and adv_em <= 0.25:
-					result.append({
-						"unicode1": cp1,
-						"unicode2": cp2,
-						"advance": adv_em
-					})
-	else:
+				if absf(k_vec.x) > 0.05 and adv_em >= -0.35 and adv_em <= 0.35:
+					for cp1 in glyph_to_cps[g1]:
+						for cp2 in glyph_to_cps[g2]:
+							result.append({
+								"unicode1": cp1,
+								"unicode2": cp2,
+								"advance": adv_em
+							})
+	elif not font_rid.is_valid():
 		for i in range(kern_count):
 			var cp1: int = kernable_cps[i]
 			var g1: int = glyph_indices[cp1]
 			for j in range(kern_count):
 				var cp2: int = kernable_cps[j]
 				var g2: int = glyph_indices[cp2]
-				var k_vec: Vector2 = Vector2.ZERO
-				if font_rid.is_valid() and ts:
-					k_vec = ts.font_get_kerning(font_rid, test_size, Vector2i(g1, g2))
-				else:
-					k_vec = font.get_kerning(0, test_size, Vector2i(g1, g2))
-
+				var k_vec: Vector2 = font.get_kerning(0, test_size, Vector2i(g1, g2))
 				var adv_em: float = snappedf(k_vec.x / float(test_size), 0.0001)
-				if absf(k_vec.x) > 0.05 and adv_em >= -0.25 and adv_em <= 0.25:
+				if absf(k_vec.x) > 0.05 and adv_em >= -0.35 and adv_em <= 0.35:
 					result.append({
 						"unicode1": cp1,
 						"unicode2": cp2,
@@ -123,7 +121,7 @@ static func extract_kerning(font_path: String, codepoints: PackedInt32Array, em_
 				var diff: float = pair_w - (a1 + a2)
 				var adv_em: float = snappedf(diff / float(test_size), 0.0001)
 
-				if absf(diff) > 0.1 and adv_em >= -0.20 and adv_em <= 0.20:
+				if absf(diff) > 0.1 and adv_em >= -0.35 and adv_em <= 0.35:
 					result.append({
 						"unicode1": cp1,
 						"unicode2": cp2,

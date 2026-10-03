@@ -9,7 +9,7 @@ uniform bool is_shadow = false;
 
 uniform vec4 text_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform vec4 outline_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform float outline_thickness : hint_range(0.0, 0.45) = 0.0;
+uniform float outline_thickness : hint_range(0.0, 1.0) = 0.0;
 uniform vec4 shadow_color : source_color = vec4(0.0, 0.0, 0.0, 0.5);
 uniform float shadow_softness : hint_range(0.001, 0.5) = 0.03;
 
@@ -46,8 +46,8 @@ void fragment() {
         if (shadow_color.a <= 0.001) {
             discard;
         }
-        float effective_outline = min(outline_thickness, 0.45);
-        float s_dist = sd - 0.5 + (outline_thickness > 0.001 ? effective_outline * 0.6 : 0.0);
+        float eff_out = clamp(outline_thickness * 0.48, 0.0, 0.48);
+        float s_dist = sd - 0.5 + (outline_thickness > 0.001 ? eff_out : 0.0);
         float screen_dist = screen_px_range * s_dist;
 
         float soft_px = max(shadow_softness * screen_px_range * 6.0, 0.5);
@@ -61,16 +61,23 @@ void fragment() {
         }
         COLOR = vec4(shadow_color.rgb, shadow_alpha);
     } else {
-        float screen_px_dist = screen_px_range * (sd - 0.5);
-        float text_alpha = clamp(screen_px_dist + 0.5, 0.0, 1.0) * text_color.a;
-
         float outline_alpha = 0.0;
+        float text_alpha = 0.0;
+
         if (outline_thickness > 0.001) {
-            float eff_thick = min(outline_thickness, 0.45);
-            float out_screen_dist = screen_px_range * (sd - (0.5 - eff_thick));
+            float eff_out = clamp(outline_thickness * 0.48, 0.0, 0.48);
+            float eff_in = clamp(outline_thickness * 0.28, 0.0, 0.28);
+
+            float out_screen_dist = screen_px_range * (sd - (0.5 - eff_out));
             outline_alpha = clamp(out_screen_dist + 0.5, 0.0, 1.0);
-            outline_alpha *= smoothstep(0.01, 0.08, sd);
+            outline_alpha *= smoothstep(0.002, 0.03, sd);
             outline_alpha *= outline_color.a;
+
+            float in_screen_dist = screen_px_range * (sd - (0.5 + eff_in));
+            text_alpha = clamp(in_screen_dist + 0.5, 0.0, 1.0) * text_color.a;
+        } else {
+            float screen_px_dist = screen_px_range * (sd - 0.5);
+            text_alpha = clamp(screen_px_dist + 0.5, 0.0, 1.0) * text_color.a;
         }
 
         vec4 col = vec4(0.0);

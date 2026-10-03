@@ -59,10 +59,19 @@ var open_project_dialog: FileDialog
 var _last_window_w: float = 0.0
 
 func _ready() -> void:
+	_setup_window_icon()
 	_setup_menus()
 	_setup_project_dialogs()
 	_setup_shader_controls()
 	export_button.pressed.connect(_on_export_button_pressed)
+
+func _setup_window_icon() -> void:
+	if ResourceLoader.exists("res://icon.svg"):
+		var icon_tex = load("res://icon.svg") as Texture2D
+		if icon_tex:
+			var img = icon_tex.get_image()
+			if img:
+				DisplayServer.set_icon(img)
 
 	if AppState:
 		AppState.generation_started.connect(_on_gen_started)
@@ -200,7 +209,7 @@ func _setup_shader_controls() -> void:
 	outline_chk.toggled.connect(func(enabled):
 		outline_thickness_slider.editable = enabled
 		if enabled and outline_thickness_slider.value <= 0.0:
-			outline_thickness_slider.value = 0.12
+			outline_thickness_slider.value = 0.25
 		AppState.update_shader_param("outline_thickness", outline_thickness_slider.value if enabled else 0.0)
 	)
 	outline_thickness_slider.value_changed.connect(func(v):

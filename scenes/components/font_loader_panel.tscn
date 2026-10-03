@@ -1,29 +1,29 @@
 [gd_scene format=3 uid="uid://d4b5ynps75aea"]
 
-[ext_resource type="Script" path="res://scenes/components/font_loader_panel.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://h01a4wskcu7n" path="res://scenes/components/font_loader_panel.gd" id="1_script"]
 
-[node name="FontLoaderPanel" type="VBoxContainer"]
+[node name="FontLoaderPanel" type="VBoxContainer" unique_id=1210772761]
 offset_right = 320.0
 offset_bottom = 220.0
 theme_override_constants/separation = 8
 script = ExtResource("1_script")
 
-[node name="HeaderLabel" type="Label" parent="."]
+[node name="HeaderLabel" type="Label" parent="." unique_id=226718699]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "FONT FILES & FALLBACKS"
 
-[node name="PrimaryLabel" type="Label" parent="."]
+[node name="PrimaryLabel" type="Label" parent="." unique_id=1438811454]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
 theme_override_font_sizes/font_size = 13
 text = "Primary Typeface:"
 
-[node name="PrimaryFontContainer" type="HBoxContainer" parent="."]
+[node name="PrimaryFontContainer" type="HBoxContainer" parent="." unique_id=1938973548]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="PathEdit" type="LineEdit" parent="PrimaryFontContainer"]
+[node name="PathEdit" type="LineEdit" parent="PrimaryFontContainer" unique_id=1130782878]
 custom_minimum_size = Vector2(40, 28)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -31,58 +31,58 @@ tooltip_text = "Path to the currently loaded primary font file."
 placeholder_text = "Select font..."
 editable = false
 
-[node name="BrowseButton" type="Button" parent="PrimaryFontContainer"]
+[node name="BrowseButton" type="Button" parent="PrimaryFontContainer" unique_id=971392046]
 custom_minimum_size = Vector2(75, 28)
 layout_mode = 2
 tooltip_text = "Browse filesystem for a .ttf, .otf, or .woff font file."
-text = "Browse..."
+text = "Browse"
 
-[node name="BundledFontButton" type="Button" parent="."]
+[node name="BundledFontButton" type="Button" parent="." unique_id=1266117328]
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-clip_text = true
 tooltip_text = "Reset and load the bundled DejaVu Sans demo font."
 text = "Load Bundled Demo (DejaVu Sans)"
-
-[node name="FontInfoLabel" type="Label" parent="."]
-layout_mode = 2
-mouse_filter = 1
-tooltip_text = "Active primary font information."
-theme_override_colors/font_color = Color(0.5, 0.8, 0.5, 1)
-theme_override_font_sizes/font_size = 13
-text = "No font selected"
-text_overrun_behavior = 3
 clip_text = true
 
-[node name="HSeparator" type="HSeparator" parent="."]
+[node name="FontInfoLabel" type="Label" parent="." unique_id=521437732]
+layout_mode = 2
+tooltip_text = "Active primary font information."
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.5019608, 0.9019608, 0.5019608, 1)
+theme_override_font_sizes/font_size = 13
+text = "No font selected"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=1442387202]
 layout_mode = 2
 
-[node name="FallbackLabel" type="Label" parent="."]
+[node name="FallbackLabel" type="Label" parent="." unique_id=1178584499]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
 theme_override_font_sizes/font_size = 13
 text = "Fallback Typefaces:"
 
-[node name="FallbackContainer" type="VBoxContainer" parent="."]
+[node name="FallbackContainer" type="VBoxContainer" parent="." unique_id=1065764506]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="FallbackList" type="VBoxContainer" parent="FallbackContainer"]
+[node name="FallbackList" type="VBoxContainer" parent="FallbackContainer" unique_id=1196585855]
 layout_mode = 2
 
-[node name="ButtonBox" type="HBoxContainer" parent="FallbackContainer"]
+[node name="ButtonBox" type="HBoxContainer" parent="FallbackContainer" unique_id=2073162309]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="AddFallbackButton" type="Button" parent="FallbackContainer/ButtonBox"]
+[node name="AddFallbackButton" type="Button" parent="FallbackContainer/ButtonBox" unique_id=889929372]
 custom_minimum_size = Vector2(50, 28)
 layout_mode = 2
 size_flags_horizontal = 3
-clip_text = true
 tooltip_text = "Add a fallback typeface to supply glyphs missing from the primary font."
-text = "+ Fallback..."
+text = "+ Fallback"
+clip_text = true
 
-[node name="ClearFallbackButton" type="Button" parent="FallbackContainer/ButtonBox"]
+[node name="ClearFallbackButton" type="Button" parent="FallbackContainer/ButtonBox" unique_id=858233177]
 custom_minimum_size = Vector2(56, 28)
 layout_mode = 2
 tooltip_text = "Remove all loaded fallback fonts."

@@ -1,12 +1,23 @@
 [gd_scene format=3 uid="uid://cfc2v5sjr1lka"]
 
-[ext_resource type="Script" path="res://scenes/components/text_preview_viewport.gd" id="1_script"]
-[ext_resource type="Script" path="res://scripts/viewports/smooth_pan_zoom.gd" id="2_panzoom"]
-[ext_resource type="Script" path="res://scripts/viewports/live_preview_controller.gd" id="3_preview"]
+[ext_resource type="Script" uid="uid://cg5pfx8nmi5th" path="res://scenes/components/text_preview_viewport.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dr3d3d02edrqo" path="res://scripts/viewports/smooth_pan_zoom.gd" id="2_panzoom"]
+[ext_resource type="Script" uid="uid://bd3elfr5fgfoc" path="res://scripts/viewports/live_preview_controller.gd" id="3_preview"]
 
-[node name="TextPreviewViewport" type="Control"]
-clip_contents = true
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jaamw"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.095316745, 0.2735303, 0.3217386, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="TextPreviewViewport" type="Control" unique_id=1600478462]
 custom_minimum_size = Vector2(640, 360)
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Toolbar" type="HBoxContainer" parent="."]
+[node name="Toolbar" type="HBoxContainer" parent="." unique_id=1857297814]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -26,16 +37,16 @@ offset_bottom = 40.0
 grow_horizontal = 2
 theme_override_constants/separation = 6
 
-[node name="FontSizeContainer" type="HBoxContainer" parent="Toolbar"]
+[node name="FontSizeContainer" type="HBoxContainer" parent="Toolbar" unique_id=746328697]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="Label" type="Label" parent="Toolbar/FontSizeContainer"]
+[node name="Label" type="Label" parent="Toolbar/FontSizeContainer" unique_id=608761110]
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 text = "Size:"
 
-[node name="SizeSlider" type="HSlider" parent="Toolbar/FontSizeContainer"]
+[node name="SizeSlider" type="HSlider" parent="Toolbar/FontSizeContainer" unique_id=721108994]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -44,7 +55,7 @@ min_value = 6.0
 max_value = 256.0
 value = 48.0
 
-[node name="SizeSpin" type="SpinBox" parent="Toolbar/FontSizeContainer"]
+[node name="SizeSpin" type="SpinBox" parent="Toolbar/FontSizeContainer" unique_id=1497426125]
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 tooltip_text = "Adjust live preview text font size in points"
@@ -53,66 +64,67 @@ max_value = 256.0
 value = 48.0
 suffix = "pt"
 
-[node name="VSeparator" type="VSeparator" parent="Toolbar"]
+[node name="VSeparator" type="VSeparator" parent="Toolbar" unique_id=1601246313]
 layout_mode = 2
 
-[node name="BgLabel" type="Label" parent="Toolbar"]
+[node name="BgLabel" type="Label" parent="Toolbar" unique_id=1358721842]
 layout_mode = 2
 theme_override_font_sizes/font_size = 13
 text = "BG:"
 
-[node name="BgOption" type="OptionButton" parent="Toolbar"]
+[node name="BgOption" type="OptionButton" parent="Toolbar" unique_id=1467853974]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 tooltip_text = "Select viewport background style (Dark, Light, Checkerboard, etc.)"
 
-[node name="KernSeparator" type="VSeparator" parent="Toolbar"]
+[node name="KernSeparator" type="VSeparator" parent="Toolbar" unique_id=316226653]
 layout_mode = 2
 
-[node name="KernToggle" type="Button" parent="Toolbar"]
+[node name="KernToggle" type="Button" parent="Toolbar" unique_id=215499483]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 tooltip_text = "Toggle typographic kerning pairs in preview text"
+theme_override_styles/normal = SubResource("StyleBoxFlat_jaamw")
 toggle_mode = true
 button_pressed = true
 text = "Kern"
 
-[node name="Spacer" type="Control" parent="Toolbar"]
+[node name="Spacer" type="Control" parent="Toolbar" unique_id=2012083659]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ZoomLabel" type="Label" parent="Toolbar"]
+[node name="ZoomLabel" type="Label" parent="Toolbar" unique_id=2100203794]
 custom_minimum_size = Vector2(44, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "100%"
 horizontal_alignment = 1
 
-[node name="ZoomIn" type="Button" parent="Toolbar"]
+[node name="ZoomIn" type="Button" parent="Toolbar" unique_id=430140249]
 custom_minimum_size = Vector2(26, 26)
 layout_mode = 2
 tooltip_text = "Zoom in (+)"
 text = "+"
 
-[node name="ZoomOut" type="Button" parent="Toolbar"]
+[node name="ZoomOut" type="Button" parent="Toolbar" unique_id=1952954824]
 custom_minimum_size = Vector2(26, 26)
 layout_mode = 2
 tooltip_text = "Zoom out (-)"
 text = "-"
 
-[node name="ZoomReset" type="Button" parent="Toolbar"]
+[node name="ZoomReset" type="Button" parent="Toolbar" unique_id=1428830922]
 custom_minimum_size = Vector2(30, 26)
 layout_mode = 2
 tooltip_text = "Reset zoom to 100% (1:1)"
 text = "1:1"
 
-[node name="ZoomFit" type="Button" parent="Toolbar"]
+[node name="ZoomFit" type="Button" parent="Toolbar" unique_id=990530084]
 custom_minimum_size = Vector2(30, 26)
 layout_mode = 2
 tooltip_text = "Fit text line to viewport"
 text = "Fit"
 
-[node name="PanZoomContainer" type="Control" parent="." node_paths=PackedStringArray("target_node")]
+[node name="PanZoomContainer" type="Control" parent="." unique_id=1430980824 node_paths=PackedStringArray("target_node")]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -126,7 +138,7 @@ focus_mode = 2
 script = ExtResource("2_panzoom")
 target_node = NodePath("Content")
 
-[node name="Background" type="ColorRect" parent="PanZoomContainer"]
+[node name="Background" type="ColorRect" parent="PanZoomContainer" unique_id=1939161924]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,26 +148,25 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.07, 0.07, 0.08, 1)
 
-[node name="PlaceholderLabel" type="Label" parent="PanZoomContainer"]
+[node name="PlaceholderLabel" type="Label" parent="PanZoomContainer" unique_id=1937380506]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.65, 0.65, 0.7, 0.85)
 theme_override_font_sizes/font_size = 16
 text = "Generate or load an MSDF atlas to preview live text."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Content" type="Control" parent="PanZoomContainer"]
+[node name="Content" type="Control" parent="PanZoomContainer" unique_id=1285915809]
 anchors_preset = 0
 offset_right = 1400.0
 offset_bottom = 800.0
 
-[node name="PreviewController" type="Control" parent="PanZoomContainer/Content"]
+[node name="PreviewController" type="Control" parent="PanZoomContainer/Content" unique_id=802661072]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -164,7 +175,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_preview")
 
-[node name="InputDrawer" type="PanelContainer" parent="."]
+[node name="InputDrawer" type="PanelContainer" parent="." unique_id=1146995651]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -174,7 +185,7 @@ offset_top = -86.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TextEdit" type="TextEdit" parent="InputDrawer"]
+[node name="TextEdit" type="TextEdit" parent="InputDrawer" unique_id=426198724]
 layout_mode = 2
 tooltip_text = "Type text here to preview in real-time with MSDF rendering and active shader effects."
 placeholder_text = "Type text to preview here in real time..."

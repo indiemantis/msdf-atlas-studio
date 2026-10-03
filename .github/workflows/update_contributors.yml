@@ -1,0 +1,46 @@
+name: Update Contributors
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src_cpp/**"
+      - "scripts/**"
+      - "scenes/**"
+      - "shaders/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-contributors:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Run contributor sync script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/ci/update_contributors.py
+
+      - name: Commit and push updates
+        run: |
+          if [ -n "$(git status --porcelain CONTRIBUTORS.md)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add CONTRIBUTORS.md
+            git commit -m "docs: sync CONTRIBUTORS.md [skip ci]"
+            git push
+          fi

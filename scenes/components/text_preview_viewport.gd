@@ -15,8 +15,15 @@ extends Control
 @onready var btn_zoom_fit: Button = $Toolbar/ZoomFit
 @onready var text_edit: TextEdit = $InputDrawer/TextEdit
 
+var bg_material: ShaderMaterial = null
+
 func _ready() -> void:
+	bg_material = ShaderMaterial.new()
+	bg_material.shader = load("res://shaders/checkerboard_background.gdshader")
+	background_rect.material = bg_material
+
 	_setup_toolbar()
+	_on_bg_selected(bg_option.selected)
 	pan_zoom.zoom_changed.connect(_on_zoom_changed)
 	size_slider.value_changed.connect(_on_font_size_changed)
 	size_spin.value_changed.connect(_on_font_size_changed)
@@ -108,10 +115,8 @@ func _on_text_changed() -> void:
 	preview_controller.set_preview_text(text_edit.text)
 
 func _on_bg_selected(idx: int) -> void:
-	match idx:
-		0: background_rect.color = Color(0.07, 0.07, 0.08, 1.0)
-		1: background_rect.color = Color(0.96, 0.96, 0.96, 1.0)
-		2: background_rect.color = Color(0.18, 0.18, 0.20, 1.0)
+	if bg_material:
+		bg_material.set_shader_parameter("bg_mode", idx)
 
 func _on_zoom_changed(z: float) -> void:
 	zoom_label.text = "%d%%" % int(round(z * 100.0))

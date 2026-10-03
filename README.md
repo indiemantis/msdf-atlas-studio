@@ -5,6 +5,11 @@
 [![C++](https://img.shields.io/badge/C%2B%2B-17-00599C?logo=c%2B%2B&logoColor=white)](https://isocpp.org)
 [![Build & Release](https://github.com/sachinthankachan/msdf-atlas-studio/actions/workflows/build_and_release.yml/badge.svg)](https://github.com/sachinthankachan/msdf-atlas-studio/actions/workflows/build_and_release.yml)
 
+
+<p align="center">
+  <img src="docs/images/msdf_atlas_studio_hero.png" alt="MSDF Atlas Studio Main UI" width="90%">
+</p>
+
 **MSDF Atlas Studio** is an open-source, high-performance desktop workstation for generating **Multi-channel Signed Distance Field (MSDF)** font texture atlases. Built with Godot 4 and C++ GDExtension, it wraps Viktor Chlumský's industry-standard `msdf-atlas-gen` and FreeType into an intuitive, responsive graphical studio.
 
 ---
@@ -31,6 +36,10 @@
   * Real-time interactive text preview running the actual MSDF fragment shader.
   * Interactive controls for text color, outline color/thickness, drop-shadow offset/color, and edge softness.
   * Infinite smooth canvas pan & zoom controls.
+
+<p align="center">
+  <img src="docs/images/live_preview_MSDF.png" alt="Live MSDF Shader Viewport Preview" width="90%">
+</p>
 * **Multi-Target Exporters:**
   * **AngelCode BMFont:** Standard `.fnt` + `.png` descriptor pairs supported by most 2D/3D engines.
   * **JSON Atlas:** Rich metadata specification compatible with WebGL, Three.js, and custom renderers.

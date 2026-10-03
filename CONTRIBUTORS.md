@@ -13,7 +13,11 @@ Thank you to everyone who contributes to **MSDF Atlas Studio**!
 
 ## Code Contributors
 
+<!-- CONTRIBUTORS_START -->
+
 * *(Contributions made via GitHub Pull Requests will be credited here)*
+
+<!-- CONTRIBUTORS_END -->
 
 ---
 

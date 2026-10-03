@@ -247,7 +247,7 @@ func rebuild_text() -> void:
 			if kerning_enabled and prev_char_code != 0:
 				var k_key: Vector2i = Vector2i(prev_char_code, code)
 				if kerning_lookup.has(k_key):
-					var k_adv: float = clampf(float(kerning_lookup[k_key]), -0.25, 0.25)
+					var k_adv: float = clampf(float(kerning_lookup[k_key]), -0.35, 0.35)
 					cursor.x += k_adv * font_size_pt
 
 			prev_char_code = code

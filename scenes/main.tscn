@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cmainscene001"]
 
-[ext_resource type="Script" uid="uid://b6judmbit25cy" path="res://scenes/main.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://crk0ndgpk3uvw" path="res://scenes/main.gd" id="1_main"]
 [ext_resource type="PackedScene" uid="uid://d4b5ynps75aea" path="res://scenes/components/font_loader_panel.tscn" id="2_fontloader"]
 [ext_resource type="PackedScene" uid="uid://wphch21lilgi" path="res://scenes/components/unicode_range_picker.tscn" id="3_unicodepicker"]
 [ext_resource type="PackedScene" uid="uid://ds2w22eawrc8o" path="res://scenes/components/atlas_settings_panel.tscn" id="4_atlassettings"]
@@ -35,26 +35,30 @@ theme_override_constants/separation = 4
 [node name="File" type="MenuButton" parent="VBoxMain/TopMenuBar" unique_id=802268996]
 custom_minimum_size = Vector2(84, 28)
 layout_mode = 2
-tooltip_text = "File operations (Export, Quit)"
 text = "File"
+flat = false
+switch_on_hover = true
 
 [node name="Presets" type="MenuButton" parent="VBoxMain/TopMenuBar" unique_id=132435682]
 custom_minimum_size = Vector2(84, 28)
 layout_mode = 2
-tooltip_text = "Quick Unicode presets (Basic ASCII, Latin-1, etc.)"
 text = "Presets"
+flat = false
+switch_on_hover = true
 
 [node name="View" type="MenuButton" parent="VBoxMain/TopMenuBar" unique_id=1002580878]
 custom_minimum_size = Vector2(84, 28)
 layout_mode = 2
-tooltip_text = "Viewport zoom controls (Reset Zoom, Fit to View)"
 text = "View"
+flat = false
+switch_on_hover = true
 
 [node name="Help" type="MenuButton" parent="VBoxMain/TopMenuBar" unique_id=1489284154]
 custom_minimum_size = Vector2(84, 28)
 layout_mode = 2
-tooltip_text = "Information about MSDF Atlas Studio"
 text = "Help"
+flat = false
+switch_on_hover = true
 
 [node name="HSplitMain" type="HSplitContainer" parent="VBoxMain" unique_id=2109702732]
 layout_mode = 2
@@ -67,6 +71,7 @@ layout_mode = 2
 [node name="Scroll" type="ScrollContainer" parent="VBoxMain/HSplitMain/LeftSidebar" unique_id=963358052]
 layout_mode = 2
 horizontal_scroll_mode = 0
+scroll_hint_mode = 1
 
 [node name="Margin" type="MarginContainer" parent="VBoxMain/HSplitMain/LeftSidebar/Scroll" unique_id=524426589]
 layout_mode = 2
@@ -131,6 +136,7 @@ layout_mode = 2
 
 [node name="Scroll" type="ScrollContainer" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar" unique_id=414972684]
 layout_mode = 2
+scroll_hint_mode = 1
 
 [node name="Margin" type="MarginContainer" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll" unique_id=2026818565]
 layout_mode = 2
@@ -346,7 +352,7 @@ text = "Outline Thickness:"
 [node name="OutlineSlider" type="HSlider" parent="VBoxMain/HSplitMain/CenterRightSplit/RightSidebar/Scroll/Margin/VBox/ShaderSection" unique_id=630083214]
 layout_mode = 2
 tooltip_text = "Adjust thickness of the procedural outline."
-max_value = 0.4
+max_value = 1.0
 step = 0.01
 editable = false
 
